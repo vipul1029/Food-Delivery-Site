@@ -2,6 +2,7 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
+    "homepage": "https://vipul1029.github.io/Food-Delivery-Site",
   "type": "module",
   "scripts": {
     "dev": "vite",

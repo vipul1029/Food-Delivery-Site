@@ -29,7 +29,7 @@
 
 
 
-
+//final
 // import express from 'express';
 // import cors from 'cors';
 // import { connectDB } from "./config/db.js";
@@ -78,6 +78,48 @@
 
 
 
+// import express from 'express';
+// import cors from 'cors';
+// import { connectDB } from "./config/db.js";
+// import foodRouter from "./routes/foodRoute.js";
+// import userRouter from "./routes/userRoute.js";
+// import 'dotenv/config';
+// import orderRouter from "./routes/orderRoute.js";
+// import cartRouter from "./routes/cartRoute.js";
+// import serverless from 'serverless-http';  // ✅ added
+
+// // app config
+// const app = express();
+
+// // middleware
+// app.use(express.json());
+// app.use(cors());
+
+// // db connection
+// connectDB();
+
+// // api endpoints
+// app.use("/api/food", foodRouter);
+// app.use("/images", express.static('uploads'));
+// app.use("/api/user", userRouter);
+// app.use("/api/cart", cartRouter);
+// app.use("/api/order", orderRouter);
+
+// app.get("/", (req, res) => {
+//   res.send("API is running");
+// });
+
+// // ✅ Export for Vercel
+// export const handler = serverless(app);
+
+
+
+
+
+
+
+
+
 import express from 'express';
 import cors from 'cors';
 import { connectDB } from "./config/db.js";
@@ -86,28 +128,34 @@ import userRouter from "./routes/userRoute.js";
 import 'dotenv/config';
 import orderRouter from "./routes/orderRoute.js";
 import cartRouter from "./routes/cartRoute.js";
-import serverless from 'serverless-http';  // ✅ added
+import serverless from 'serverless-http';
 
-// app config
 const app = express();
+const PORT = process.env.PORT || 4000;
 
-// middleware
+// Middleware
 app.use(express.json());
 app.use(cors());
 
-// db connection
+// Connect DB
 connectDB();
 
-// api endpoints
+// API Routes
 app.use("/api/food", foodRouter);
 app.use("/images", express.static('uploads'));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 
+// Health Check
 app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-// ✅ Export for Vercel
+// ✅ Start server locally (only if not serverless)
+if (process.env.NODE_ENV !== "serverless") {
+  app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+}
+
+// ✅ Export for serverless platforms
 export const handler = serverless(app);

@@ -105,6 +105,10 @@
 
 
 
+
+
+
+//final code
 import foodModel from "../models/foodModel.js";
 import fs from 'fs';
 
@@ -159,4 +163,10 @@ const removeFood = async (req, res) => {
 };
 
 export { addFood, listFood, removeFood };
+
+
+
+
+
+
 

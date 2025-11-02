@@ -1,13 +1,14 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Food Delivery Backend",
   "license": "ISC",
-  "author": "",
+  "author": "vipul",
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -18,7 +19,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
     "multer": "^2.0.2",
-    "react-toastify": "^11.0.5",
     "serverless-http": "^4.0.0",
     "stripe": "^18.5.0",
     "validator": "^13.15.15"

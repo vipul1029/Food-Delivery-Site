@@ -79,7 +79,7 @@
 
 
 import React, { useEffect, useContext } from 'react';
-import './verify.css';
+import './Verify.css';
 import axios from 'axios';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';

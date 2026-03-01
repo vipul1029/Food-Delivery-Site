@@ -1309,7 +1309,7 @@ const StoreContextProvider = (props) => {
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
-  const url = "http://localhost:4000";
+  const url = "https://food-delivery-backend-5031.onrender.com/";
 
   // Fetch food list
   const fetchFoodList = async () => {

@@ -47,27 +47,27 @@
 
 
 
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
-const authMiddleware = async (req, res, next) => {
-  try {
-    // Get token from Authorization header
-    const authHeader = req.headers.authorization;
-    if (!authHeader) return res.json({ success: false, message: "Unauthorized" });
+// const authMiddleware = async (req, res, next) => {
+//   try {
+//     // Get token from Authorization header
+//     const authHeader = req.headers.authorization;
+//     if (!authHeader) return res.json({ success: false, message: "Unauthorized" });
 
-    const token = authHeader.split(" ")[1]; // "Bearer <token>"
-    if (!token) return res.json({ success: false, message: "Unauthorized" });
+//     const token = authHeader.split(" ")[1]; // "Bearer <token>"
+//     if (!token) return res.json({ success: false, message: "Unauthorized" });
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.body.userId = decoded.id; // attach userId
-    next();
-  } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Invalid token" });
-  }
-};
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     req.body.userId = decoded.id; // attach userId
+//     next();
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ success: false, message: "Invalid token" });
+//   }
+// };
 
-export default authMiddleware;
+// export default authMiddleware;
 
 
 
@@ -140,3 +140,73 @@ export default authMiddleware;
 // };
 
 // export default authMiddleware;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import jwt from "jsonwebtoken";
+
+// const authMiddleware = async (req, res, next) => {
+//   try {
+//     // Get token from Authorization header
+//     const authHeader = req.headers.authorization;
+//     if (!authHeader) {
+//       return res.status(401).json({ success: false, message: "Unauthorized" });
+//     }
+
+//     const token = authHeader.split(" ")[1]; // "Bearer <token>"
+//     if (!token) {
+//       return res.status(401).json({ success: false, message: "Unauthorized" });
+//     }
+
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     req.body.userId = decoded.id; // attach userId
+//     next();
+//   } catch (error) {
+//     console.error("authMiddleware error:", error);
+//     res.status(401).json({ success: false, message: "Invalid token" });
+//   }
+// };
+
+// export default authMiddleware;
+
+
+
+
+
+
+
+
+import jwt from "jsonwebtoken";
+
+const authMiddleware = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    req.userId = decoded.id; // ✅ FIXED HERE
+
+    next();
+  } catch (error) {
+    console.error("authMiddleware error:", error);
+    res.status(401).json({ success: false, message: "Invalid token" });
+  }
+};
+
+export default authMiddleware;

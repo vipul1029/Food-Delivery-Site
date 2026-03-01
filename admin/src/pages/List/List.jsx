@@ -1,68 +1,69 @@
-import React from 'react'
-import './List.css'
-import axios from 'axios'
-import { useState } from 'react'
-import { useEffect } from 'react'
+//final
+// import React from 'react'
+// import './List.css'
+// import axios from 'axios'
+// import { useState } from 'react'
+// import { useEffect } from 'react'
 
-import 'react-toastify/dist/ReactToastify.css'
-import {toast} from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css'
+// import {toast} from 'react-toastify'
 
 
-const List = ({url}) => {
+// const List = ({url}) => {
  
-  const[list,setList]=useState([])
-  const fetchList=async()=>{
-    const response=await axios.get(`${url}/api/food/list`);
-    console.log(response.data);
-    if(response.data.success){
-      setList(response.data.data);
-    }
-    else{
-     toast.error("Error")
-    setList(response.data.data)
-    }
-  }
-  const removeFood=async(foodId)=>{
-    const response=await axios.post(`${url}/api/food/remove`,{id:foodId});
-    if(response.data.success){
-      toast.success(response.data.message)
+//   const[list,setList]=useState([])
+//   const fetchList=async()=>{
+//     const response=await axios.get(`${url}/api/food/list`);
+//     console.log(response.data);
+//     if(response.data.success){
+//       setList(response.data.data);
+//     }
+//     else{
+//      toast.error("Error")
+//     setList(response.data.data)
+//     }
+//   }
+//   const removeFood=async(foodId)=>{
+//     const response=await axios.post(`${url}/api/food/remove`,{id:foodId});
+//     if(response.data.success){
+//       toast.success(response.data.message)
     
-    }
-    else{
-      toast.error("Error");
-    }
-  }
-  useEffect(()=>{
-    fetchList();
-  },[])
-  return (
-    <div className='list add flex-col'>
-      <p>All Foods List</p>
-      <div className="list-table">
-        <div className="list-table-format title">
-          <b>Image</b>
-          <b>Name</b>
-          <b>Category</b>
-          <b>Price</b>
-          <b>Action</b>
-        </div>
-        {list.map((item,index)=>{
-          return(
-          <div key={index} className='list-table-format'>
-      <img src={`${url}/images/`+item.image} alt="" />
-      <p>{item.name}</p>
-      <p>{item.category}</p>
-      <p>${item.price}</p>
-      <p onClick={()=>removeFood(item._id)} className='cursor'>X</p>
-          </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
+//     }
+//     else{
+//       toast.error("Error");
+//     }
+//   }
+//   useEffect(()=>{
+//     fetchList();
+//   },[])
+//   return (
+//     <div className='list add flex-col'>
+//       <p>All Foods List</p>
+//       <div className="list-table">
+//         <div className="list-table-format title">
+//           <b>Image</b>
+//           <b>Name</b>
+//           <b>Category</b>
+//           <b>Price</b>
+//           <b>Action</b>
+//         </div>
+//         {list.map((item,index)=>{
+//           return(
+//           <div key={index} className='list-table-format'>
+//       <img src={`${url}/images/`+item.image} alt="" />
+//       <p>{item.name}</p>
+//       <p>{item.category}</p>
+//       <p>${item.price}</p>
+//       <p onClick={()=>removeFood(item._id)} className='cursor'>X</p>
+//           </div>
+//           )
+//         })}
+//       </div>
+//     </div>
+//   )
+// }
 
-export default List
+// export default List
 
 
 
@@ -156,3 +157,114 @@ export default List
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import './List.css'; // Your custom CSS for styling
+
+// const List = ({ list, url }) => {
+//   return (
+//     <div className="list">
+//       <h2>Food List</h2>
+//       <div className="list-table">
+//         <div className="list-table-header">
+//           <b>Image</b>
+//           <b>Name</b>
+//           <b>Category</b>
+//           <b>Price</b>
+//         </div>
+        
+//         {list.map((item, index) => {
+//           // Check if the image is a Cloudinary URL or a local file
+//           const imageUrl = item.image && (item.image.startsWith('http') 
+//             ? item.image 
+//             : `${url}/uploads/${item.image}`);
+
+//           return (
+//             <div key={index} className="list-table-item">
+//               <img src={imageUrl} alt={item.name} className="food-image" />
+//               <p>{item.name}</p>
+//               <p>{item.category}</p>
+//               <p>${item.price}</p>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default List;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React from 'react';
+import './List.css';
+
+const List = ({ list, url }) => {
+  return (
+    <div className="list">
+      <h2>Food List</h2>
+      <div className="list-table">
+        <div className="list-table-header">
+          <b>Image</b>
+          <b>Name</b>
+          <b>Category</b>
+          <b>Price</b>
+        </div>
+
+        {/* ✅ Safe access with optional chaining */}
+        {list?.map((item, index) => {
+          const imageUrl =
+            item.image && (item.image.startsWith('http')
+              ? item.image
+              : `${url}/uploads/${item.image}`);
+
+          return (
+            <div key={index} className="list-table-item">
+              <img src={imageUrl} alt={item.name} className="food-image" />
+              <p>{item.name}</p>
+              <p>{item.category}</p>
+              <p>${item.price}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default List;

@@ -665,7 +665,13 @@ const __dirname = path.dirname(__filename);
 
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://food-delivery-site-vipul1007.vercel.app"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

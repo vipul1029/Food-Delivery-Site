@@ -9,7 +9,7 @@ import LoginPopup from './components/LoginPopup/LoginPopup'
  import './App.css';
 
 import MyOrders from './Pages/MyOrders/MyOrders'
-import Verify from './Pages/verify/verify';  // Make sure the path is correct
+import Verify from './Pages/Verify/Verify';// Make sure the path is correct
 
 // in Routes
 
